@@ -1,0 +1,96 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://enemy/daBOSS/daBOSS.png" type="Texture" id=1]
+[ext_resource path="res://Hurt and Hit boxes/HurtBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Hurt and Hit boxes/HitBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingLeft_3.png" type="Texture" id=4]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingRight_2.png" type="Texture" id=5]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingRight_3.png" type="Texture" id=6]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingRight_1.png" type="Texture" id=7]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingLeft_2.png" type="Texture" id=8]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingRight_4.png" type="Texture" id=9]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingLeft_1.png" type="Texture" id=10]
+[ext_resource path="res://enemy/daBOSS/daBOSS_shootingLeft_4.png" type="Texture" id=11]
+[ext_resource path="res://enemy/daBOSS.gd" type="Script" id=12]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=13]
+[ext_resource path="res://sounds/Machine Gun - Sound Effect [HD].wav" type="AudioStream" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "die",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "shootLeft",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "shootRight",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idleLeft",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 27.1128, 11.4773 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 29.3882, 60.3531 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 30.3038, 76.9175 )
+
+[node name="daBOSS" type="KinematicBody2D"]
+script = ExtResource( 12 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 4.01135, 4 )
+frames = SubResource( 1 )
+animation = "idleLeft"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 13.9355, 84.7381 )
+scale = Vector2( 1.22427, -3.6867 )
+shape = SubResource( 2 )
+
+[node name="HitBox" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 661.48, 306.893 )
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( -648.118, -243.787 )
+shape = SubResource( 3 )
+
+[node name="Stats" parent="." instance=ExtResource( 13 )]
+max_health = 8
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="HurtBox" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( -35.4112, -14.7897 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2( 51.1074, 63.7072 )
+shape = SubResource( 4 )
+
+[node name="gunShot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -20.048
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HitBox"]
+[editable path="HurtBox"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/8-Bit Laser Gun Sound Effect.wav-8d6e8577a7138159a2fcf0683723a3c8.sample"
+
+[deps]
+
+source_file="res://Sounds/8-Bit Laser Gun Sound Effect.wav"
+dest_files=[ "res://.import/8-Bit Laser Gun Sound Effect.wav-8d6e8577a7138159a2fcf0683723a3c8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

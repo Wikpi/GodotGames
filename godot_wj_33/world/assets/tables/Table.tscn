@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://world/assets/tables/table.png" type="Texture" id=1]
+[ext_resource path="res://world/assets/tables/Table.gd" type="Script" id=2]
+[ext_resource path="res://Hurt and Hit boxes/HurtBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/PlayerStats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world/assets/tables/table_break_3.png" type="Texture" id=5]
+[ext_resource path="res://world/assets/tables/table_break_2.png" type="Texture" id=6]
+[ext_resource path="res://world/assets/tables/table_gone.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "break2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "gone",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "break1",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 39.522, 80.3306 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 37.4501, 79.4069 )
+
+[node name="Table" type="StaticBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 90.612 )
+scale = Vector2( 7, 7 )
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -4.4949, 101.279 )
+shape = SubResource( 2 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -63.7525, 114.454 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2( 60.7167, -18.2605 )
+shape = SubResource( 3 )
+
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+max_health = 3
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]

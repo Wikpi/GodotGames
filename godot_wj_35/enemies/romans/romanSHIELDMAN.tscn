@@ -1,0 +1,103 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://world/objects/explosion/explosion5.png" type="Texture" id=1]
+[ext_resource path="res://world/objects/explosion/explosion10.png" type="Texture" id=2]
+[ext_resource path="res://world/objects/explosion/explosion2.png" type="Texture" id=3]
+[ext_resource path="res://world/objects/explosion/explosion6.png" type="Texture" id=4]
+[ext_resource path="res://world/objects/explosion/explosion9.png" type="Texture" id=5]
+[ext_resource path="res://world/objects/explosion/explosion3.png" type="Texture" id=6]
+[ext_resource path="res://world/objects/explosion/explosion7.png" type="Texture" id=7]
+[ext_resource path="res://sounds/Enemy Dying Sound Effects.wav" type="AudioStream" id=8]
+[ext_resource path="res://world/objects/explosion/explosion1.png" type="Texture" id=9]
+[ext_resource path="res://enemies/romans/romanSoldier1.gd" type="Script" id=10]
+[ext_resource path="res://world/objects/explosion/explosion8.png" type="Texture" id=11]
+[ext_resource path="res://world/objects/explosion/explosion4.png" type="Texture" id=12]
+[ext_resource path="res://enemies/romans/romanSHILEDMAN_move4.png" type="Texture" id=13]
+[ext_resource path="res://enemies/romans/romanSHILEDMAN_move1.png" type="Texture" id=14]
+[ext_resource path="res://enemies/romans/romanSHILEDMAN_idle.png" type="Texture" id=15]
+[ext_resource path="res://enemies/romans/romanSHILEDMAN_move2.png" type="Texture" id=16]
+[ext_resource path="res://enemies/romans/romanSHILEDMAN_move3.png" type="Texture" id=17]
+[ext_resource path="res://hitbox and hurtbox/HitBox.tscn" type="PackedScene" id=18]
+[ext_resource path="res://enemies/Stats.tscn" type="PackedScene" id=19]
+[ext_resource path="res://hitbox and hurtbox/HurtBox.tscn" type="PackedScene" id=20]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 13 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "walk_r",
+"speed": 8.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6.2047, 21.611 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 7.93635, 25.2299 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 15.8454, 2.54542 )
+
+[node name="romanSHIELDMAN" type="KinematicBody2D" groups=[
+"movingGroup",
+]]
+position = Vector2( -0.353554, -28.1075 )
+scale = Vector2( 3, 3 )
+script = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "walk_r"
+frame = 6
+
+[node name="EXPLOSION" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+frames = SubResource( 2 )
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0.432673, 28.4992 )
+shape = SubResource( 3 )
+
+[node name="Stats" parent="." instance=ExtResource( 19 )]
+max_health = 2
+
+[node name="HurtBox" parent="." instance=ExtResource( 20 )]
+visible = false
+position = Vector2( 5.22872, 11.2112 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2( -4.65913, 13.092 )
+shape = SubResource( 4 )
+
+[node name="HitBox" parent="." instance=ExtResource( 18 )]
+visible = false
+position = Vector2( -15.8983, 43.2836 )
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 20.7907, -18.5823 )
+shape = SubResource( 5 )
+
+[node name="hitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -20.8
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

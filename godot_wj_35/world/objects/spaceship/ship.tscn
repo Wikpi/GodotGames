@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/objects/spaceship/meetingShip.png" type="Texture" id=1]
+
+[node name="ship" type="StaticBody2D"]
+scale = Vector2( 3, 3 )
+z_index = 1
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 11.2943, -16.142 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( -906.83, -121.811 )
+scale = Vector2( 0.337514, 0.337514 )
+polygon = PoolVector2Array( 2512, 456, 2432, 432, 2424, 360, 2472, 328, 2536, 296, 2600, 296, 2624, 296, 2680, 288, 2768, 288, 2864, 288, 2952, 304, 2992, 304, 3032, 328, 3048, 368, 3048, 400, 3016, 408, 3008, 432, 2976, 456, 2928, 456, 2888, 472, 2800, 480, 2696, 480, 2632, 472, 2536, 464 )

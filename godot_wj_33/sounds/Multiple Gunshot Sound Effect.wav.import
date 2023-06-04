@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Multiple Gunshot Sound Effect.wav-f959938c39af31a701f28add918a21ad.sample"
+
+[deps]
+
+source_file="res://sounds/Multiple Gunshot Sound Effect.wav"
+dest_files=[ "res://.import/Multiple Gunshot Sound Effect.wav-f959938c39af31a701f28add918a21ad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

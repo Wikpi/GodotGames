@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://world/Button.gd" type="Script" id=1]
+[ext_resource path="res://world/assets/wall/mianmenu.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://UIs/Clickuper.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+font_data = SubResource( 3 )
+
+[node name="DeathScene" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 682.582, 384.151 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 253.503
+margin_top = 143.958
+margin_right = 1159.5
+margin_bottom = 297.958
+custom_fonts/font = SubResource( 2 )
+text = "Mission failed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 588.218
+margin_top = 386.818
+margin_right = 805.218
+margin_bottom = 469.818
+custom_fonts/font = SubResource( 4 )
+text = "Main Menu"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+reference_path = "res://world/MainMenu.tscn"

@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://world/Button.gd" type="Script" id=1]
+[ext_resource path="res://world/assets/wall/mianmenu.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://UIs/Clickuper.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+use_filter = true
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 35
+use_filter = true
+font_data = SubResource( 5 )
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Button
+
+export var reference_path = \"\"
+export(bool) var start_focused = false
+
+func _ready():
+	if(start_focused):
+		grab_focus()
+	connect(\"mouse_entered\",self,\"_on_Button_mouse_entered\")
+	connect(\"pressed\",self,\"_on_Button_Pressed\")
+
+func _on_Button_mouse_entered():
+	grab_focus()
+
+func _on_Button_Pressed():
+	if(reference_path != \"\"):
+		get_tree().change_scene(reference_path)
+	else:
+		get_tree().quit()
+"
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 684.702, 386.127 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 279.924
+margin_top = 97.8053
+margin_right = 1715.92
+margin_bottom = 362.805
+custom_fonts/font = SubResource( 2 )
+text = "   CodeName: 
+katana Baldy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="."]
+margin_left = 543.505
+margin_top = 427.823
+margin_right = 770.505
+margin_bottom = 494.823
+custom_fonts/font = SubResource( 4 )
+text = "New Game"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+reference_path = "res://world/ControlHelpScreen.tscn"
+
+[node name="Exit" type="Button" parent="."]
+margin_left = 543.505
+margin_top = 552.217
+margin_right = 770.505
+margin_bottom = 619.217
+custom_fonts/font = SubResource( 6 )
+text = "Exit"
+script = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

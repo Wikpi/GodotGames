@@ -1,0 +1,159 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://world/Button.gd" type="Script" id=1]
+[ext_resource path="res://world/assets/wall/control_wall.png" type="Texture" id=2]
+[ext_resource path="res://world/assets/wall/call_info.png" type="Texture" id=3]
+[ext_resource path="res://world/assets/wall/awsd.png" type="Texture" id=4]
+[ext_resource path="res://world/assets/wall/space.png" type="Texture" id=5]
+[ext_resource path="res://world/assets/wall/e.png" type="Texture" id=6]
+[ext_resource path="res://world/ControlScreenLabel.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+outline_size = 1
+outline_color = Color( 0.305882, 0.305882, 0.305882, 1 )
+use_filter = true
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 26
+outline_size = 1
+outline_color = Color( 0.313726, 0.313726, 0.313726, 1 )
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://UIs/Clickuper.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 28
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 46
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 46
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 46
+font_data = SubResource( 11 )
+
+[node name="ControlHelpScreen" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 687.308, 404.465 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( -519.405, -534.575, 1451.41, 829.575 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 683.005, 669.281 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 216.0
+margin_top = 589.0
+margin_right = 1345.0
+margin_bottom = 746.0
+custom_fonts/font = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 39.8655
+margin_top = 720.523
+margin_right = 158.866
+margin_bottom = 757.523
+custom_fonts/font = SubResource( 4 )
+text = "Employer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Next" type="Button" parent="."]
+margin_left = 1154.88
+margin_top = 685.921
+margin_right = 1295.88
+margin_bottom = 733.921
+custom_fonts/font = SubResource( 6 )
+text = "Next"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+reference_path = "res://world/World.tscn"
+
+[node name="Controls" type="Node2D" parent="."]
+
+[node name="awsd" type="Sprite" parent="Controls"]
+position = Vector2( 209.055, 180.303 )
+scale = Vector2( 2.01136, 2.01136 )
+texture = ExtResource( 4 )
+
+[node name="move" type="Label" parent="Controls"]
+margin_left = 126.399
+margin_top = 254.997
+margin_right = 251.399
+margin_bottom = 317.997
+custom_fonts/font = SubResource( 8 )
+text = "Move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="e" type="Sprite" parent="Controls"]
+position = Vector2( 1122.53, 180 )
+scale = Vector2( 2.011, 2.011 )
+texture = ExtResource( 6 )
+
+[node name="enter" type="Label" parent="Controls"]
+margin_left = 931.88
+margin_top = 254.997
+margin_right = 1312.88
+margin_bottom = 383.997
+custom_fonts/font = SubResource( 10 )
+text = "Enter
+room/door"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="space" type="Sprite" parent="Controls"]
+position = Vector2( 661.047, 180 )
+scale = Vector2( 2.011, 2.011 )
+texture = ExtResource( 5 )
+
+[node name="attack" type="Label" parent="Controls"]
+margin_left = 559.484
+margin_top = 254.997
+margin_right = 709.484
+margin_bottom = 317.997
+custom_fonts/font = SubResource( 12 )
+text = "Attack"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next_char" type="Timer" parent="."]
+
+[connection signal="timeout" from="next_char" to="." method="_on_next_char_timeout"]

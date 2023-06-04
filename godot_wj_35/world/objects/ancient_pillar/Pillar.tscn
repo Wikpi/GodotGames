@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world/objects/ancient_pillar/pillar_1.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10.6696, 5.64457 )
+
+[node name="Pillar" type="StaticBody2D"]
+scale = Vector2( 4, 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -1.47372, 26.1585 )
+shape = SubResource( 1 )

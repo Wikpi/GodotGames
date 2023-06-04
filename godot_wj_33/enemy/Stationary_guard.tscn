@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://enemy/stationary_guard/guard_1_idle_right.png" type="Texture" id=1]
+[ext_resource path="res://enemy/stationary_guard/guard_1_idle_left.png" type="Texture" id=2]
+[ext_resource path="res://Hurt and Hit boxes/HurtBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemy/Stationary_guard.gd" type="Script" id=5]
+[ext_resource path="res://Hurt and Hit boxes/HitBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://enemy/stationary_guard/guard_1_shoot_left_1.png" type="Texture" id=7]
+[ext_resource path="res://enemy/stationary_guard/guard_1_shoot_left_2.png" type="Texture" id=8]
+[ext_resource path="res://enemy/stationary_guard/guard_1_shoot_right_1.png" type="Texture" id=9]
+[ext_resource path="res://enemy/stationary_guard/guard_1_shoot_right_2.png" type="Texture" id=10]
+[ext_resource path="res://sounds/8-bit game gunshot sound.wav" type="AudioStream" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "shootLeft",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "finishShootRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idleLeft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "shootRight",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idleRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "finishShootLeft",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 23.9419, 46.8467 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 19.797, 48.4175 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 21.9993, 47.6006 )
+
+[node name="Stationary_guard" type="KinematicBody2D"]
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 3.134, 3.134 )
+frames = SubResource( 1 )
+animation = "idleLeft"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 22.1025, 27.8467 )
+shape = SubResource( 2 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 3 )]
+position = Vector2( -35.4112, -14.7897 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2( 56.1074, 41.7072 )
+shape = SubResource( 3 )
+
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+max_health = 1
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="HitBox" parent="." instance=ExtResource( 6 )]
+position = Vector2( 66.1826, -27.4889 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( -45.7049, 53.5895 )
+shape = SubResource( 4 )
+
+[node name="gunShot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -20.809
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

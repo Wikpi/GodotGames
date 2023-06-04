@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/dialogic/Dialog.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/objects/backgrounds/meeting.png" type="Texture" id=2]
+[ext_resource path="res://world/levels/meeting.gd" type="Script" id=3]
+[ext_resource path="res://world/levels/firstTravel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world/objects/cars/anotherCar_2.png" type="Texture" id=5]
+[ext_resource path="res://world/objects/dr/moustacheBIG_2.png" type="Texture" id=6]
+[ext_resource path="res://world/objects/dr/moustacheBIG_1.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="Animation" id=2]
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[node name="meeting" type="Node2D"]
+script = ExtResource( 3 )
+target_scene = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 787.351, 423.042 )
+scale = Vector2( 1.23706, 1.18809 )
+texture = ExtResource( 2 )
+
+[node name="DialogNode" parent="." instance=ExtResource( 1 )]
+margin_left = 683.034
+margin_top = 629.183
+margin_right = 683.034
+margin_bottom = 629.183
+timeline = "timeline-1626124962.json"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 246.935, 466.661 )
+frames = SubResource( 1 )
+frame = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -80.0
+margin_right = 1500.0
+margin_bottom = 880.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 2 )
+
+[node name="anotherCar_2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 164.624, 275.255 )
+texture = ExtResource( 5 )
+
+[connection signal="dialogic_signal" from="DialogNode" to="." method="_on_DialogNode_dialogic_signal"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

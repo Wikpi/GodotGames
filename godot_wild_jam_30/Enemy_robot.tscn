@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Enemies/robot_0.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/robot_2.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/robot_1.png" type="Texture" id=3]
+[ext_resource path="res://HitBox.gd" type="Script" id=4]
+[ext_resource path="res://Enemy_robot.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16.8309, 14.6568 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="Enemy_robot" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 14.681, -12.3962 )
+scale = Vector2( 1.91756, 1.77477 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 11.7858, -8.9797 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 12.5992, -9.13443 )
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_Enemy_robot_body_entered"]

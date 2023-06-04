@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://hurtbox and hitbox/HitBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/laser_bullet.png" type="Texture" id=2]
+[ext_resource path="res://Player/laser_bullet.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19.9071, 5.46764 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 18.3498, 5.04387 )
+
+[node name="laser_bullet" type="Area2D"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4.59806, -4.83195 )
+shape = SubResource( 1 )
+
+[node name="HitBox" parent="." instance=ExtResource( 1 )]
+position = Vector2( 455.047, 457.424 )
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( -460.65, -462.455 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="." to="." method="_on_laser_bullet_body_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="HitBox"]

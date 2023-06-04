@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/8-Bit Laser Gun Sound Effect.mp3-b51d342a9a28ff88f50fb391aaa52060.mp3str"
+
+[deps]
+
+source_file="res://Sounds/8-Bit Laser Gun Sound Effect.mp3"
+dest_files=[ "res://.import/8-Bit Laser Gun Sound Effect.mp3-b51d342a9a28ff88f50fb391aaa52060.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

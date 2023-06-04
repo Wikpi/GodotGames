@@ -1,0 +1,274 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Objects/walls/earthLevelWall.png" type="Texture" id=2]
+[ext_resource path="res://World/Objects/floor/grass.png" type="Texture" id=3]
+[ext_resource path="res://World/Objects/walls/item_stat_bar.png" type="Texture" id=4]
+[ext_resource path="res://UIs/HealthUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Levels/floor.gd" type="Script" id=6]
+[ext_resource path="res://World/Levels/LevelEarth.gd" type="Script" id=7]
+[ext_resource path="res://World/Levels/carrotsINlevel.gd" type="Script" id=8]
+[ext_resource path="res://UIs/carrot_count.png" type="Texture" id=9]
+[ext_resource path="res://World/Objects/hayBales/Sideways_bale.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World/Objects/cropPlots/cropPlot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://World/Levels/TextDisplayer.gd" type="Script" id=12]
+[ext_resource path="res://World/Objects/walls/e.png" type="Texture" id=13]
+[ext_resource path="res://World/Objects/walls/arrow.png" type="Texture" id=14]
+[ext_resource path="res://World/Levels/musicPlayer.gd" type="Script" id=15]
+[ext_resource path="res://Sounds/mainTheme.wav" type="AudioStream" id=16]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
+void fragment() {
+	vec2 shifteduv = UV;
+	shifteduv.x += TIME * scroll_speed;
+	vec4 col = texture(TEXTURE, shifteduv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scroll_speed = null
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 2442.98, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2168, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 712.412 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 488.89 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 87.2, 14.487 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 127.542 )
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
+void fragment() {
+	vec2 shifteduv = UV;
+	shifteduv.x += TIME * scroll_speed;
+	vec4 col = texture(TEXTURE, shifteduv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/scroll_speed = null
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 40
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 11 )
+
+[sub_resource type="DynamicFontData" id=13]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=14]
+size = 50
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 13 )
+
+[node name="LevelEarth" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="YSort"]
+pause_mode = 1
+
+[node name="background" type="TextureRect" parent="YSort/Wall"]
+material = SubResource( 2 )
+margin_left = -3.0
+margin_top = 66.0
+margin_right = 1363.0
+margin_bottom = 218.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stat bar" type="Sprite" parent="YSort/Wall"]
+position = Vector2( 682.976, 32.1889 )
+texture = ExtResource( 4 )
+
+[node name="down" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 679.76, 981.059 )
+shape = SubResource( 3 )
+
+[node name="upper" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 664, 200 )
+shape = SubResource( 4 )
+
+[node name="left" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( -10.2311, 385.458 )
+shape = SubResource( 5 )
+
+[node name="right" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 2704, 448 )
+shape = SubResource( 6 )
+
+[node name="down2" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 79.162, 764.7 )
+shape = SubResource( 7 )
+
+[node name="left2" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 170.807, 875.011 )
+shape = SubResource( 8 )
+
+[node name="Floor" type="StaticBody2D" parent="YSort"]
+pause_mode = 1
+
+[node name="floor1" type="TextureRect" parent="YSort/Floor"]
+material = SubResource( 10 )
+margin_left = -0.0812532
+margin_top = 210.039
+margin_right = 1365.92
+margin_bottom = 786.039
+rect_scale = Vector2( 1.00341, 1.00055 )
+texture = ExtResource( 3 )
+stretch_mode = 2
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="cropplots" type="YSort" parent="YSort"]
+
+[node name="cropPlot" parent="YSort/cropplots" instance=ExtResource( 11 )]
+position = Vector2( 827.453, 319.89 )
+
+[node name="e" type="Sprite" parent="YSort/cropplots" groups=[
+"movingGroup",
+]]
+position = Vector2( 840.043, 349.311 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 13 )
+
+[node name="arrow" type="Sprite" parent="YSort/cropplots" groups=[
+"movingGroup",
+]]
+position = Vector2( 824.487, 381.838 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="HayBales" type="YSort" parent="YSort"]
+position = Vector2( 558.927, 28.541 )
+
+[node name="Sideways_bale" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( -6.46735, 237.203 )
+
+[node name="Sideways_bale2" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( -30.6277, 608.526 )
+
+[node name="Sideways_bale3" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( 283.78, 240.763 )
+
+[node name="Sideways_bale4" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( 270.012, 609.135 )
+
+[node name="Sideways_bale5" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( -366.74, 608.421 )
+
+[node name="Sideways_bale6" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( -334.951, 234.766 )
+
+[node name="Sideways_bale7" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( 580.523, 611.569 )
+
+[node name="Sideways_bale8" parent="YSort/HayBales" instance=ExtResource( 10 )]
+position = Vector2( 603.153, 238.216 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 114.913, 393.497 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_left = 11.5051
+margin_top = -3.23731
+margin_right = 45.5051
+margin_bottom = 33.7627
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="carrotsINlevel" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="carrot_count" type="Label" parent="CanvasLayer/carrotsINlevel"]
+margin_left = 515.451
+margin_top = 16.2495
+margin_right = 555.451
+margin_bottom = 56.2495
+custom_fonts/font = SubResource( 12 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/carrotsINlevel"]
+position = Vector2( 474.072, 22.7841 )
+scale = Vector2( 4.43957, 4.43957 )
+texture = ExtResource( 9 )
+
+[node name="TextDisplayer" type="Label" parent="CanvasLayer"]
+margin_left = 792.49
+margin_top = 12.5992
+margin_right = 832.49
+margin_bottom = 62.5992
+custom_fonts/font = SubResource( 14 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ms" type="Timer" parent="CanvasLayer/TextDisplayer"]
+wait_time = 0.1
+autostart = true
+
+[node name="musicPlayer" type="Node" parent="."]
+script = ExtResource( 15 )
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="musicPlayer"]
+stream = ExtResource( 16 )
+volume_db = -19.838
+pitch_scale = 1.24
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="CanvasLayer/TextDisplayer/ms" to="CanvasLayer/TextDisplayer" method="_on_ms_timeout"]
+[connection signal="finished" from="musicPlayer/BGMusic" to="musicPlayer" method="_on_BGMusic_finished"]

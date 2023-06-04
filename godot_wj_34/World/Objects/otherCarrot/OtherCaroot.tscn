@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://World/Objects/otherCarrot/idle.png" type="Texture" id=1]
+[ext_resource path="res://World/Objects/otherCarrot/idle2.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 26.7894, 30.5901 )
+
+[node name="OtherCaroot" type="StaticBody2D"]
+position = Vector2( -2, 76 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 3, 3 )
+frames = SubResource( 1 )
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 3.14978, 64.256 )
+shape = SubResource( 2 )

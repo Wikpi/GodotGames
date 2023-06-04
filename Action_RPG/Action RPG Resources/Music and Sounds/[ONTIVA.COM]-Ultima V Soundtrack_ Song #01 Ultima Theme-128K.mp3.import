@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/[ONTIVA.COM]-Ultima V Soundtrack_ Song #01 Ultima Theme-128K.mp3-85fab23ef1011dedf7a414079fe93531.mp3str"
+
+[deps]
+
+source_file="res://Action RPG Resources/Music and Sounds/[ONTIVA.COM]-Ultima V Soundtrack_ Song #01 Ultima Theme-128K.mp3"
+dest_files=[ "res://.import/[ONTIVA.COM]-Ultima V Soundtrack_ Song #01 Ultima Theme-128K.mp3-85fab23ef1011dedf7a414079fe93531.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

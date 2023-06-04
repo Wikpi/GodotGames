@@ -1,0 +1,248 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://World/Screens/button.gd" type="Script" id=1]
+[ext_resource path="res://World/Screens/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://World/Objects/walls/mainMenu.png" type="Texture" id=3]
+[ext_resource path="res://Player/charecter_sprites/idle_l.png" type="Texture" id=4]
+[ext_resource path="res://World/Objects/otherCarrot/idle.png" type="Texture" id=5]
+[ext_resource path="res://Player/charecter_sprites/carrot.png" type="Texture" id=6]
+[ext_resource path="res://World/Screens/introScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/Levels/musicPlayer.gd" type="Script" id=8]
+[ext_resource path="res://Sounds/mainTheme.wav" type="AudioStream" id=9]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/carrot.png-c86f8c3a101b13818fe0b6833f2ee093.stex"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/idle_l.png-0ec69b92763751dcde4cdc3dc54401f0.stex"
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/idle_l.png-0ec69b92763751dcde4cdc3dc54401f0.stex"
+
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/idle.png-b30df4e5ea5db4e7df639b2b25a9af7a.stex"
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 100
+use_filter = true
+font_data = SubResource( 5 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "New Anim"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect2:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect2:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorRect2:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorRect2:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.270588, -0.25, 0, 0.25, 0, 0.545098, -0.25, 0, 0.25, 0, 0.835294, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 )
+}
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 80
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=11]
+size = 15
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 10 )
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 2 )
+target_scene = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 718.788, 394.988 )
+scale = Vector2( 1.11806, 1.21983 )
+texture = ExtResource( 3 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+position = Vector2( 282.724, 624.503 )
+rotation = -0.523598
+scale = Vector2( 10.449, 10.449 )
+texture = SubResource( 1 )
+flip_h = true
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 46.2762, 800.789 )
+rotation = 0.261799
+scale = Vector2( 10.449, 10.449 )
+texture = ExtResource( 4 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 510.976, 452.826 )
+scale = Vector2( 10.449, 10.449 )
+texture = SubResource( 2 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 1205.33, -95.5167 )
+scale = Vector2( 10.449, 10.449 )
+texture = SubResource( 3 )
+flip_v = true
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 877.94, 431.294 )
+scale = Vector2( 10.4494, 10.4494 )
+texture = ExtResource( 5 )
+
+[node name="Sprite8" type="Sprite" parent="."]
+position = Vector2( 179.944, -92.8329 )
+scale = Vector2( 10.4494, 10.4494 )
+texture = SubResource( 4 )
+flip_v = true
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( 1255.47, 781.536 )
+rotation = -0.261799
+scale = Vector2( 10.449, 10.449 )
+texture = ExtResource( 6 )
+flip_v = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -177.0
+margin_top = -34.1189
+margin_right = 1543.0
+margin_bottom = 886.881
+color = Color( 0, 0, 0, 0.572549 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 383.213
+margin_top = 54.7447
+margin_right = 1045.21
+margin_bottom = 154.745
+custom_fonts/font = SubResource( 6 )
+text = "For the Carrots!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 7 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 2.0
+margin_top = -2.0
+margin_right = 1371.0
+margin_bottom = 772.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="."]
+pause_mode = 2
+margin_left = 509.162
+margin_top = 245.605
+margin_right = 852.162
+margin_bottom = 351.605
+custom_fonts/font = SubResource( 9 )
+text = "New GAme"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="."]
+pause_mode = 2
+margin_left = 492.345
+margin_top = 382.909
+margin_right = 864.345
+margin_bottom = 488.909
+custom_fonts/font = SubResource( 9 )
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+pause_mode = 2
+margin_left = 485.578
+margin_top = 520.721
+margin_right = 864.578
+margin_bottom = 626.721
+custom_fonts/font = SubResource( 9 )
+text = "Quit Game"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullScreen" type="Button" parent="."]
+margin_left = 1170.0
+margin_top = 689.0
+margin_right = 1256.0
+margin_bottom = 718.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 11 )
+text = "FullScreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="musicPlayer" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="musicPlayer"]
+stream = ExtResource( 9 )
+volume_db = -20.41
+pitch_scale = 0.91
+autoplay = true
+
+[connection signal="pressed" from="NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="FullScreen" to="." method="_on_FullScreen_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="finished" from="musicPlayer/BGMusic" to="musicPlayer" method="_on_BGMusic_finished"]

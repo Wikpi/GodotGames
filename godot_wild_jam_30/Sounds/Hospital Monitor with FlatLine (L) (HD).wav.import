@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hospital Monitor with FlatLine (L) (HD).wav-42bdcb2c359ba7d76b2a68cabe0553da.sample"
+
+[deps]
+
+source_file="res://Sounds/Hospital Monitor with FlatLine (L) (HD).wav"
+dest_files=[ "res://.import/Hospital Monitor with FlatLine (L) (HD).wav-42bdcb2c359ba7d76b2a68cabe0553da.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

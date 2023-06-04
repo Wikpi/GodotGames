@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://world/Button.gd" type="Script" id=1]
+[ext_resource path="res://world/WinScreen.gd" type="Script" id=2]
+[ext_resource path="res://world/assets/wall/mianmenu.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://UIs/Clickuper.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://UIs/Clickuper.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 100
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://UIs/ProzaLibre-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 35
+font_data = SubResource( 5 )
+
+[node name="WinScreen" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 684.984, 385.303 )
+texture = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 381.947
+margin_top = 173.406
+margin_right = 897.947
+margin_bottom = 304.406
+custom_fonts/font = SubResource( 2 )
+text = "You Won"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="edn" type="Label" parent="."]
+margin_left = 907.19
+margin_top = 169.784
+margin_right = 966.19
+margin_bottom = 300.784
+custom_fonts/font = SubResource( 4 )
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 556.702
+margin_top = 390.406
+margin_right = 773.702
+margin_bottom = 473.406
+custom_fonts/font = SubResource( 6 )
+text = "Main Menu"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+reference_path = "res://world/MainMenu.tscn"
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

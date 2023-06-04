@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://World/Objects/cropPlots/empty.png" type="Texture" id=1]
+[ext_resource path="res://World/Objects/cropPlots/withCarrots.png" type="Texture" id=2]
+[ext_resource path="res://World/Objects/cropPlots/cropPlot.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "withCarrots",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 68.6546, 66.7264 )
+
+[node name="cropPlot" type="Area2D" groups=[
+"movingGroup",
+]]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 7.12717, 148.78 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 3 )
+animation = "withCarrots"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 7.12723, 153.235 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_cropPlot_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_cropPlot_body_exited"]

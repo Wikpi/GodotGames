@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://world/screens/Button.gd" type="Script" id=1]
+[ext_resource path="res://world/objects/backgrounds/starBG.png" type="Texture" id=2]
+[ext_resource path="res://world/levels/starsBG.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
+void fragment() {
+	vec2 shifteduv = UV;
+	shifteduv.x += TIME * scroll_speed;
+	vec4 col = texture(TEXTURE, shifteduv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scroll_speed = null
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 60
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 50
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 50
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 50
+font_data = SubResource( 9 )
+
+[node name="Options" type="Node2D"]
+
+[node name="Sprite" type="TextureRect" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+stretch_mode = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scroll_speed = 0.2
+
+[node name="Label" type="Label" parent="."]
+margin_left = 493.014
+margin_top = 178.784
+margin_right = 756.014
+margin_bottom = 301.784
+custom_fonts/font = SubResource( 4 )
+text = "ASWD - move
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 507.363
+margin_top = 276.535
+margin_right = 730.363
+margin_bottom = 326.535
+custom_fonts/font = SubResource( 6 )
+text = "LMB - shoot"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Button" parent="."]
+margin_left = 64.0
+margin_top = 664.0
+margin_right = 168.0
+margin_bottom = 720.0
+custom_fonts/font = SubResource( 8 )
+text = "Back"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+reference_path = "res://world/screens/MainMenu.tscn"
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 220.944
+margin_top = 365.102
+margin_right = 1052.94
+margin_bottom = 468.102
+custom_fonts/font = SubResource( 10 )
+text = "SPACE/ENTER - progress the
+conversation"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

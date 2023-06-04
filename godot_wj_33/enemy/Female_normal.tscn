@@ -1,0 +1,88 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://enemy/normal_females/female_normal.png" type="Texture" id=1]
+[ext_resource path="res://Hurt and Hit boxes/HurtBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemy/Enemy_normal.gd" type="Script" id=3]
+[ext_resource path="res://player/PlayerStats.tscn" type="PackedScene" id=5]
+[ext_resource path="res://enemy/WanderControler.tscn" type="PackedScene" id=6]
+[ext_resource path="res://enemy/normal_females/female_normal_right.png" type="Texture" id=7]
+[ext_resource path="res://enemy/normal_females/female_normal_right_walk_1.png" type="Texture" id=8]
+[ext_resource path="res://enemy/normal_females/female_normal_left_walk_1.png" type="Texture" id=9]
+[ext_resource path="res://enemy/normal_females/female_normal_right_walk_0.png" type="Texture" id=10]
+[ext_resource path="res://enemy/normal_females/female_normal_left_walk_0.png" type="Texture" id=11]
+[ext_resource path="res://enemy/normal_females/female_normal_right_run_1.png" type="Texture" id=12]
+[ext_resource path="res://enemy/normal_females/female_normal_left_run_1.png" type="Texture" id=13]
+[ext_resource path="res://enemy/normal_females/female_normal_right_run_0.png" type="Texture" id=14]
+[ext_resource path="res://enemy/normal_females/female_normal_left_run_0.png" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "idleLeft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 15 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "run_left",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": false,
+"name": "idleRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 14 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "run_right",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 14.386, 19.6473 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 20.6362, 42.0704 )
+
+[node name="Female_normal" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="Animations" type="AnimatedSprite" parent="."]
+scale = Vector2( 3.04119, 3.04119 )
+frames = SubResource( 1 )
+animation = "idleRight"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 27.252, 51.8273 )
+shape = SubResource( 2 )
+
+[node name="HurtBox" parent="." instance=ExtResource( 2 )]
+position = Vector2( 12.5888, -31.7897 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2( 15.9359, 63.0824 )
+shape = SubResource( 3 )
+
+[node name="Stats" parent="." instance=ExtResource( 5 )]
+max_health = 1
+
+[node name="IdleTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="WanderControler" parent="." instance=ExtResource( 6 )]
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
+[editable path="HurtBox"]

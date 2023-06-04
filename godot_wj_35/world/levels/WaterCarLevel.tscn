@@ -1,0 +1,251 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://world/objects/backgrounds/skyBG.png" type="Texture" id=1]
+[ext_resource path="res://world/objects/backgrounds/city.png" type="Texture" id=2]
+[ext_resource path="res://world/objects/cars/playerCar_1.png" type="Texture" id=3]
+[ext_resource path="res://world/levels/WaterCarLevel.gd" type="Script" id=4]
+[ext_resource path="res://world/objects/dr/dr.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world/objects/spaceship/ship.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/objects/floor/road.png" type="Texture" id=8]
+[ext_resource path="res://sounds/get in car.wav" type="AudioStream" id=9]
+[ext_resource path="res://player/Camera2D.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sounds/CAR ENGINE.wav" type="AudioStream" id=12]
+[ext_resource path="res://UIs/HealthUI.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
+void fragment() {
+	vec2 shifteduv = UV;
+	shifteduv.x += TIME * scroll_speed;
+	vec4 col = texture(TEXTURE, shifteduv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scroll_speed = null
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 2825.05, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2797.64, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 14.0708, 536 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10.56, 946.699 )
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 6.65958
+height = 98.2704
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 61.0754
+height = 144.722
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 84.0723
+height = 574.872
+
+[sub_resource type="Animation" id=10]
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[node name="WaterCarLevel" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
+pause_mode = 2
+position = Vector2( -468.723, 687.671 )
+scale = Vector2( 3, 3 )
+smoothing_enabled = true
+smoothing_speed = 2.0
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -1573.64, 0.682018 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 1356.73, 764.786 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="wall" type="StaticBody2D" parent="YSort"]
+
+[node name="background" type="Sprite" parent="YSort/wall"]
+material = SubResource( 2 )
+position = Vector2( 87.8248, 273.774 )
+scale = Vector2( 1.97439, 1.94922 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 339.564, 29.6967, 1681.69, 299.588 )
+
+[node name="upperCollision" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( 586.919, 540.1 )
+shape = SubResource( 3 )
+
+[node name="down" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( 695.717, 809.067 )
+shape = SubResource( 4 )
+
+[node name="right" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( 1231.91, 543.292 )
+shape = SubResource( 5 )
+
+[node name="left" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( -1328.47, 469.379 )
+shape = SubResource( 6 )
+
+[node name="city" type="Sprite" parent="YSort"]
+position = Vector2( 623.197, 179.257 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="floor" type="StaticBody2D" parent="YSort"]
+
+[node name="Sprite" type="Sprite" parent="YSort/floor"]
+position = Vector2( 51.1834, 569.742 )
+scale = Vector2( 25.026, 5 )
+texture = ExtResource( 8 )
+region_rect = Rect2( -256.41, -238, 3172.43, 608.855 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 11 )]
+pause_mode = 2
+position = Vector2( -468.723, 674.201 )
+z_index = 1
+
+[node name="playerCamera" type="RemoteTransform2D" parent="YSort/Player"]
+pause_mode = 2
+position = Vector2( 0, 4.48987 )
+remote_path = NodePath("../../../Camera2D")
+
+[node name="playerCar_1" type="StaticBody2D" parent="YSort"]
+position = Vector2( 426.442, 410.686 )
+scale = Vector2( 6, 6 )
+
+[node name="Sprite" type="Sprite" parent="YSort/playerCar_1"]
+position = Vector2( -2.80299, 22.9845 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/playerCar_1"]
+visible = false
+position = Vector2( -1.88562, 46.937 )
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="dr" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -160.556, 358.941 )
+
+[node name="leaveAREA" type="Area2D" parent="YSort"]
+position = Vector2( 252.805, -233.384 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/leaveAREA"]
+position = Vector2( -287.942, 572.195 )
+rotation = 1.5708
+shape = SubResource( 8 )
+
+[node name="getInCar" type="Area2D" parent="YSort"]
+position = Vector2( -21.1893, 99.5896 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/getInCar"]
+position = Vector2( 422.964, 644.581 )
+rotation = 1.5708
+shape = SubResource( 9 )
+
+[node name="ship" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( -1360.89, 663.186 )
+
+[node name="HealthUI" parent="." instance=ExtResource( 13 )]
+visible = false
+margin_left = 1071.1
+margin_top = 53.9531
+margin_right = 1071.1
+margin_bottom = 53.9531
+rect_scale = Vector2( 5, 5 )
+
+[node name="Dialogic" type="Node2D" parent="."]
+
+[node name="darkenNode" type="Node2D" parent="."]
+z_index = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="darkenNode"]
+"anims/New Anim" = SubResource( 10 )
+
+[node name="Timer2" type="Timer" parent="darkenNode"]
+wait_time = 3.0
+
+[node name="ColorRect" type="ColorRect" parent="darkenNode"]
+visible = false
+margin_left = -1941.15
+margin_top = -96.9583
+margin_right = 3981.85
+margin_bottom = 1017.04
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="getInCar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 2.694
+
+[node name="carRevUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = 1.361
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="YSort/leaveAREA" to="YSort/Player" method="_on_leaveAREA_body_entered"]
+[connection signal="body_entered" from="YSort/getInCar" to="." method="_on_getInCar_body_entered"]
+[connection signal="timeout" from="darkenNode/Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="finished" from="getInCar" to="." method="_on_getInCar_finished"]
+[connection signal="finished" from="carRevUp" to="." method="_on_carRevUp_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="Camera2D"]

@@ -1,0 +1,232 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/assets/floor/office_floor.png" type="Texture" id=2]
+[ext_resource path="res://world/assets/wall/office_wall_blank.png" type="Texture" id=3]
+[ext_resource path="res://world/assets/tables/Table.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world/assets/plants/potted_tree_1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://enemy/Stationary_guard.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world/assets/floor/red_carpet.png" type="Texture" id=7]
+[ext_resource path="res://world/assets/plants/potted_plant_1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/assets/Currency/Gold_coin.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world/Currency.gd" type="Script" id=10]
+[ext_resource path="res://world/assets/tables/TableSideways.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world/assets/doors/Door_next_floor.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/Level1.tscn" type="PackedScene" id=13]
+[ext_resource path="res://world/assets/wall/ui_wall.png" type="Texture" id=14]
+[ext_resource path="res://UIs/HealthUI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world/Enemies.gd" type="Script" id=16]
+[ext_resource path="res://world/World.gd" type="Script" id=17]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 947.803, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.5321, 389.616 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12.2492, 424.166 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 735.629, 10 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://UIs/Clickuper.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 36
+outline_size = 2
+outline_color = Color( 0.568627, 0.568627, 0.568627, 1 )
+use_filter = true
+font_data = SubResource( 5 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 17 )
+
+[node name="YSort" type="YSort" parent="."]
+position = Vector2( 0, 53.8811 )
+
+[node name="floor" type="StaticBody2D" parent="YSort"]
+
+[node name="floor" type="Sprite" parent="YSort/floor"]
+position = Vector2( 681.769, 370.984 )
+scale = Vector2( 2.65124, 2.29483 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( -152.556, -61.8083, 527.187, 306.015 )
+
+[node name="carpet" type="Sprite" parent="YSort/floor"]
+position = Vector2( 318.902, 422.48 )
+scale = Vector2( 1, 0.749334 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( -127.189, -102.608, 1999.4, 204.772 )
+
+[node name="Sprite" type="Sprite" parent="YSort/floor"]
+position = Vector2( 1274.89, 225.229 )
+rotation = 1.5708
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 3.45186, 253.928, 87.4511 )
+
+[node name="wall" type="StaticBody2D" parent="YSort"]
+
+[node name="Sprite2" type="Sprite" parent="YSort/wall"]
+position = Vector2( 681.16, 70.5502 )
+scale = Vector2( 1.38571, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="upper" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( 515.686, 133.954 )
+shape = SubResource( 1 )
+
+[node name="right" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( 1379.07, 334.192 )
+shape = SubResource( 2 )
+
+[node name="left" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( -13.3435, 334.55 )
+shape = SubResource( 3 )
+
+[node name="down" type="CollisionShape2D" parent="YSort/wall"]
+position = Vector2( 662.549, 725.295 )
+shape = SubResource( 4 )
+
+[node name="UIwall" type="Sprite" parent="YSort/wall"]
+position = Vector2( 685.021, -29.1571 )
+scale = Vector2( 1.33713, 1 )
+texture = ExtResource( 14 )
+
+[node name="Tables" type="YSort" parent="YSort"]
+
+[node name="Table4" parent="YSort/Tables" instance=ExtResource( 4 )]
+position = Vector2( 685.312, 164.103 )
+
+[node name="Table" parent="YSort/Tables/Table4" instance=ExtResource( 4 )]
+position = Vector2( -0.542725, -47.6461 )
+
+[node name="Table" parent="YSort/Tables/Table4/Table" instance=ExtResource( 4 )]
+position = Vector2( -0.197266, -48.1079 )
+
+[node name="Table3" parent="YSort/Tables" instance=ExtResource( 4 )]
+position = Vector2( 683.068, 562.65 )
+
+[node name="Table2" parent="YSort/Tables/Table3" instance=ExtResource( 4 )]
+position = Vector2( -0.578125, -48.1288 )
+
+[node name="Table" parent="YSort/Tables/Table3/Table2" instance=ExtResource( 4 )]
+position = Vector2( -0.957214, -46.8998 )
+
+[node name="TableSideways" parent="YSort/Tables" instance=ExtResource( 11 )]
+position = Vector2( 178.199, 180.53 )
+
+[node name="TableSideways2" parent="YSort/Tables" instance=ExtResource( 11 )]
+position = Vector2( 179.786, 547.219 )
+
+[node name="TableSideways3" parent="YSort/Tables" instance=ExtResource( 11 )]
+position = Vector2( 943.326, 547.219 )
+
+[node name="TableSideways4" parent="YSort/Tables" instance=ExtResource( 11 )]
+position = Vector2( 941.738, 180.53 )
+
+[node name="Enemies" type="YSort" parent="YSort"]
+script = ExtResource( 16 )
+
+[node name="Stationary_guard" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 533.213, 488.658 )
+
+[node name="Stationary_guard2" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 521.917, 254.128 )
+
+[node name="TrashCans" type="YSort" parent="YSort"]
+
+[node name="Plants" type="YSort" parent="YSort"]
+
+[node name="potted_plant_1" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 90.2375, 80.1221 )
+
+[node name="potted_plant_2" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 237.316, 81.5363 )
+
+[node name="potted_plant_3" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 371.666, 80.1221 )
+
+[node name="potted_plant_4" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 525.815, 78.7079 )
+
+[node name="potted_plant_5" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 832.079, 87.1209 )
+
+[node name="potted_plant_6" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 1007.38, 90.7431 )
+
+[node name="potted_plant_7" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 1204.46, 85.3388 )
+
+[node name="potted_plant_8" parent="YSort/Plants" instance=ExtResource( 5 )]
+position = Vector2( 1347.55, 88.1994 )
+
+[node name="potted_plant_9" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( 165.499, 575.793 )
+
+[node name="potted_plant_10" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( 271.855, 221.802 )
+
+[node name="potted_plant_11" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( 1030.63, 577.38 )
+
+[node name="potted_plant_12" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( 978.249, 213.865 )
+
+[node name="Currency" type="YSort" parent="YSort"]
+
+[node name="message" type="YSort" parent="YSort"]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 86.9249, 435.687 )
+
+[node name="Door_next_floor" parent="YSort" instance=ExtResource( 12 )]
+position = Vector2( 1305.49, 47.2649 )
+target_scene = ExtResource( 13 )
+
+[node name="UIs" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="UIs" instance=ExtResource( 15 )]
+margin_left = 6.62853
+margin_top = 1.28089
+margin_right = 46.6286
+margin_bottom = 41.2809
+
+[node name="Currency" type="Control" parent="UIs"]
+margin_left = 102.897
+margin_top = -13.0353
+margin_right = 142.897
+margin_bottom = 26.9647
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gold_coin" parent="UIs/Currency" instance=ExtResource( 9 )]
+position = Vector2( 632.99, 27.0058 )
+
+[node name="Sprite" parent="UIs/Currency/Gold_coin" index="0"]
+position = Vector2( -2.18003, 3.23048 )
+scale = Vector2( 1.65513, 1.35698 )
+
+[node name="CollisionShape2D" parent="UIs/Currency/Gold_coin" index="1"]
+shape = null
+
+[node name="currency_count" type="Label" parent="UIs/Currency"]
+margin_left = 570.644
+margin_top = 12.4443
+margin_right = 616.644
+margin_bottom = 65.4443
+custom_fonts/font = SubResource( 6 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[editable path="UIs/Currency/Gold_coin"]

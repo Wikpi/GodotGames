@@ -1,0 +1,203 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://world/objects/backgrounds/starBG.png" type="Texture" id=1]
+[ext_resource path="res://addons/dialogic/Dialog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/objects/spaceship/travelling_1.png" type="Texture" id=3]
+[ext_resource path="res://world/objects/spaceship/travelling_2.png" type="Texture" id=4]
+[ext_resource path="res://world/levels/starsBG.gd" type="Script" id=5]
+[ext_resource path="res://world/levels/firstTravel.gd" type="Script" id=6]
+[ext_resource path="res://world/levels/WaterCarLevel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sounds/Through Time and Space - Intro BGM.mp3" type="AudioStream" id=8]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
+void fragment() {
+	vec2 shifteduv = UV;
+	shifteduv.x += TIME * scroll_speed;
+	vec4 col = texture(TEXTURE, shifteduv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scroll_speed = null
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "goFaster",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "go_faster"
+}, {
+"args": [  ],
+"method": "change_Scene"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "New Anim"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("beginingRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("beginingRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("beginingRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("beginingRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[node name="secondFly" type="Node2D"]
+script = ExtResource( 6 )
+target_scene = ExtResource( 7 )
+
+[node name="stars" type="TextureRect" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 1 )
+stretch_mode = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scroll_speed = 0.4
+
+[node name="ship" type="AnimatedSprite" parent="."]
+position = Vector2( 682.608, 319.474 )
+scale = Vector2( 3.35345, 3.35345 )
+frames = SubResource( 3 )
+
+[node name="DialogNode" parent="." instance=ExtResource( 2 )]
+margin_left = 730.928
+margin_top = 784.335
+margin_right = 730.928
+margin_bottom = 784.335
+timeline = "timeline-1626202809.json"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1382.0
+margin_bottom = 779.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="waitTime" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="begining" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 5 )
+
+[node name="beginingRect" type="ColorRect" parent="."]
+margin_right = 1486.0
+margin_bottom = 792.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+pitch_scale = 0.94
+
+[connection signal="dialogic_signal" from="DialogNode" to="." method="_on_DialogNode_dialogic_signal"]
+[connection signal="finished" from="bgm" to="." method="_on_bgm_finished"]

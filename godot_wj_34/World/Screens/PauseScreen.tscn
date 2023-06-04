@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://World/Screens/button.gd" type="Script" id=1]
+[ext_resource path="res://World/Screens/PauseScreen.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=14]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=15]
+size = 15
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 14 )
+
+[node name="PauseScreen" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -1109.0
+margin_top = -778.0
+margin_right = 1222.0
+margin_bottom = 449.0
+color = Color( 0, 0, 0, 0.631373 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToHub" type="Button" parent="."]
+pause_mode = 2
+margin_left = -219.297
+margin_top = -307.034
+margin_right = 265.703
+margin_bottom = -201.034
+custom_fonts/font = SubResource( 2 )
+text = "Back to Ship"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+reference_path = "res://World/Levels/Hub.tscn"
+
+[node name="Controls" type="Button" parent="."]
+pause_mode = 2
+margin_left = -177.297
+margin_top = -188.034
+margin_right = 194.703
+margin_bottom = -82.0343
+custom_fonts/font = SubResource( 2 )
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+pause_mode = 2
+margin_left = -180.486
+margin_top = -65.0659
+margin_right = 198.514
+margin_bottom = 40.9341
+custom_fonts/font = SubResource( 2 )
+text = "Quit Game"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullScreen" type="Button" parent="."]
+margin_left = 477.111
+margin_top = 195.29
+margin_right = 563.111
+margin_bottom = 224.29
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 15 )
+text = "FullScreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="FullScreen" to="." method="_on_FullScreen_pressed"]

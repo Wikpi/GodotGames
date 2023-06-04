@@ -1,0 +1,163 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/Objects/floor/hub_floor_tile.png" type="Texture" id=2]
+[ext_resource path="res://World/Levels/LevelEarth.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Objects/walls/hub_wall.png" type="Texture" id=4]
+[ext_resource path="res://World/Objects/doors/TelePad.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Objects/walls/tv.png" type="Texture" id=6]
+[ext_resource path="res://World/Levels/saved.gd" type="Script" id=7]
+[ext_resource path="res://World/Levels/toSave.gd" type="Script" id=8]
+[ext_resource path="res://World/Objects/otherCarrot/OtherCaroot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://World/Levels/spaceTheme.gd" type="Script" id=10]
+[ext_resource path="res://Sounds/spaceTheme.wav" type="AudioStream" id=11]
+[ext_resource path="res://World/Objects/shelf/shelf.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 746.918, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 777.421, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 507.203 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 488.89 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 13.3645, 13.1726 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 6 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 40
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 8 )
+
+[node name="Hub" type="Node2D"]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="YSort"]
+
+[node name="Sprite" type="Sprite" parent="YSort/Floor"]
+position = Vector2( 684.177, 458.792 )
+scale = Vector2( 0.736928, 0.830395 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( -598.647, -201.102, 1849.45, 738.983 )
+
+[node name="Wall" type="StaticBody2D" parent="YSort"]
+
+[node name="down" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 645.018, 777.934 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="YSort/Wall"]
+position = Vector2( 682.996, 76.0247 )
+texture = ExtResource( 4 )
+
+[node name="upper" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 646.389, 151.49 )
+shape = SubResource( 2 )
+
+[node name="left" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( -10.2311, 381.894 )
+shape = SubResource( 3 )
+
+[node name="right" type="CollisionShape2D" parent="YSort/Wall"]
+visible = false
+position = Vector2( 1375.96, 461.704 )
+shape = SubResource( 4 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 158.904, 655.638 )
+
+[node name="TelePad" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 1202.19, 147.432 )
+target_scene = ExtResource( 3 )
+
+[node name="tv" type="StaticBody2D" parent="YSort"]
+position = Vector2( 266.02, 111.493 )
+scale = Vector2( 15, 7 )
+
+[node name="Sprite" type="Sprite" parent="YSort/tv"]
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/tv"]
+visible = false
+position = Vector2( 0.133333, 2 )
+shape = SubResource( 5 )
+
+[node name="Node2D" type="Node2D" parent="YSort/tv"]
+position = Vector2( -11.4976, -10.4355 )
+scale = Vector2( 0.0666667, 0.142857 )
+
+[node name="toSave" type="Label" parent="YSort/tv/Node2D"]
+margin_left = -3.77974
+margin_top = -8.18948
+margin_right = 342.22
+margin_bottom = 41.8105
+custom_fonts/font = SubResource( 7 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="saved" type="Label" parent="YSort/tv/Node2D"]
+margin_left = -0.87326
+margin_top = 79.0899
+margin_right = 39.1267
+margin_bottom = 119.09
+custom_fonts/font = SubResource( 9 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OtherCaroot" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 565.962, 204.468 )
+
+[node name="sehlves" type="YSort" parent="YSort"]
+
+[node name="shelf" parent="YSort/sehlves" instance=ExtResource( 12 )]
+position = Vector2( 136.39, 551.32 )
+
+[node name="shelf2" parent="YSort/sehlves" instance=ExtResource( 12 )]
+position = Vector2( 139.595, 393.183 )
+
+[node name="shelf3" parent="YSort/sehlves" instance=ExtResource( 12 )]
+position = Vector2( 1215.64, 392.994 )
+
+[node name="shelf4" parent="YSort/sehlves" instance=ExtResource( 12 )]
+position = Vector2( 1214.23, 553.313 )
+
+[node name="shelf5" parent="YSort/sehlves" instance=ExtResource( 12 )]
+position = Vector2( 639.916, 167.622 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="spaceTheme" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="spaceTheme"]
+stream = ExtResource( 11 )
+volume_db = -6.011
+autoplay = true
+
+[connection signal="finished" from="spaceTheme/BGMusic" to="spaceTheme" method="_on_BGMusic_finished"]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://enemy/soldier/soldierRUN_left_1.png" type="Texture" id=1]
+[ext_resource path="res://enemy/soldier/soldierRUN_right_0.png" type="Texture" id=2]
+[ext_resource path="res://enemy/soldier/soldierRUN_left_2.png" type="Texture" id=3]
+[ext_resource path="res://enemy/soldier/soldierRUN_left_3.png" type="Texture" id=4]
+[ext_resource path="res://enemy/soldier/soldierRUN_right_2.png" type="Texture" id=5]
+[ext_resource path="res://enemy/soldier/soldierRUN_left_0.png" type="Texture" id=6]
+[ext_resource path="res://enemy/soldier/soldierRUN_right_3.png" type="Texture" id=7]
+[ext_resource path="res://enemy/soldier/soldierRUN_right_1.png" type="Texture" id=8]
+[ext_resource path="res://enemy/Soldier.gd" type="Script" id=9]
+[ext_resource path="res://Hurt and Hit boxes/HurtBox.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Hurt and Hit boxes/HitBox.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sounds/Multiple Gunshot Sound Effect.wav" type="AudioStream" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "shootRight",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "shootLeft",
+"speed": 9.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20.4381, 21.9594 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 19.797, 48.4175 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16.2754, 32.5509 )
+
+[node name="Soldier" type="KinematicBody2D"]
+script = ExtResource( 9 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 3, 3 )
+frames = SubResource( 1 )
+animation = "shootLeft"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.80615, 72.96 )
+shape = SubResource( 2 )
+
+[node name="Stats" parent="." instance=ExtResource( 12 )]
+max_health = 1
+
+[node name="HurtBox" parent="." instance=ExtResource( 10 )]
+position = Vector2( -35.4112, -14.7897 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="HurtBox" index="1"]
+position = Vector2( 40.0893, 62.3972 )
+shape = SubResource( 3 )
+
+[node name="HitBox" parent="." instance=ExtResource( 11 )]
+position = Vector2( 61.9692, 137.991 )
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( -58.9292, -75.2048 )
+shape = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="gunshot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -19.883
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

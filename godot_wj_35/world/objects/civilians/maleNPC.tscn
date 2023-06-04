@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://world/objects/civilians/maleW_1.png" type="Texture" id=1]
+[ext_resource path="res://world/objects/civilians/maleW_4.png" type="Texture" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.19793, 10.5192 )
+
+[node name="maleNPC" type="KinematicBody2D"]
+position = Vector2( 8.19828, -14.6181 )
+scale = Vector2( 3, 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -8.67646, 20.69 )
+shape = SubResource( 2 )

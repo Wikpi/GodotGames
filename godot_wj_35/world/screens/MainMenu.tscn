@@ -1,0 +1,190 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://world/screens/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://world/levels/meeting.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world/objects/spaceship/travelling_menu.png" type="Texture" id=3]
+[ext_resource path="res://world/objects/backgrounds/starBG.png" type="Texture" id=4]
+[ext_resource path="res://world/levels/starsBG.gd" type="Script" id=5]
+[ext_resource path="res://world/objects/spaceship/travelling_menu_2.png" type="Texture" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
+void fragment() {
+	vec2 shifteduv = UV;
+	shifteduv.x += TIME * scroll_speed;
+	shifteduv.y -= TIME * scroll_speed;
+	vec4 col = texture(TEXTURE, shifteduv);
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scroll_speed = null
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 100
+outline_size = 1
+font_data = SubResource( 3 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.0
+} ]
+
+[sub_resource type="Animation" id=6]
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorRect:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ColorRect:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 50
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=10]
+size = 50
+font_data = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=11]
+font_path = "res://UIs/GL-Nummernschild-Mtl.ttf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 50
+font_data = SubResource( 11 )
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 1 )
+target_scene = ExtResource( 2 )
+
+[node name="starBG" type="TextureRect" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 4 )
+stretch_mode = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scroll_speed = 0.2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 53.489
+margin_top = 97.072
+margin_right = 706.489
+margin_bottom = 300.072
+custom_fonts/font = SubResource( 4 )
+text = "Through time 
+and space"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="travelling_1" type="AnimatedSprite" parent="."]
+position = Vector2( 743.055, 349.463 )
+rotation = -0.261799
+scale = Vector2( 4, 4 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -103.0
+margin_top = -67.0
+margin_right = 1662.0
+margin_bottom = 952.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="."]
+margin_left = 53.489
+margin_top = 477.416
+margin_right = 221.489
+margin_bottom = 533.416
+custom_fonts/font = SubResource( 8 )
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 53.489
+margin_top = 559.493
+margin_right = 152.489
+margin_bottom = 615.493
+custom_fonts/font = SubResource( 10 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGame" type="Button" parent="."]
+margin_left = 53.4891
+margin_top = 392.838
+margin_right = 157.489
+margin_bottom = 448.838
+custom_fonts/font = SubResource( 12 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="NewGame" to="." method="_on_NewGame_pressed"]

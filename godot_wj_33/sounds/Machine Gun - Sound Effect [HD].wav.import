@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Machine Gun - Sound Effect [HD].wav-eb4b918244d810a9e65ff925e38a8981.sample"
+
+[deps]
+
+source_file="res://sounds/Machine Gun - Sound Effect [HD].wav"
+dest_files=[ "res://.import/Machine Gun - Sound Effect [HD].wav-eb4b918244d810a9e65ff925e38a8981.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player/Robot_drive_0.png" type="Texture" id=1]
+[ext_resource path="res://Player/Robot_jump.png" type="Texture" id=2]
+[ext_resource path="res://Player/HurtBox.gd" type="Script" id=3]
+[ext_resource path="res://Player/Robot_drive_1.png" type="Texture" id=4]
+[ext_resource path="res://Player/Robot_idle.png" type="Texture" id=5]
+[ext_resource path="res://Player/Player.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Shoot_attack",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Run",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 23.2477, 23.5492 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12.2822, 13.4671 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 9 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 10.4697, -6.18635 )
+scale = Vector2( 1.74283, 1.60317 )
+frames = SubResource( 1 )
+animation = "Run"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 8.94281, -7.69209 )
+shape = SubResource( 2 )
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2( 10.4697, -6.18635 )
+scale = Vector2( 1.74283, 1.60317 )
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( -1.26511, -0.982368 )
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="HurtBox"]
+
+[node name="BackwardsLevelGoing" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="invincibility_ended" from="HurtBox" to="HurtBox" method="_on_HurtBox_invincibility_ended"]
+[connection signal="invincibility_started" from="HurtBox" to="HurtBox" method="_on_HurtBox_invincibility_started"]
+[connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_Timer_timeout"]
+[connection signal="timeout" from="BackwardsLevelGoing" to="." method="_on_BackwardsLevelGoing_timeout"]
